@@ -1,14 +1,21 @@
 package main.java.model;
 
-public class Scores {
+import javax.sql.rowset.serial.SerialArray;
+import java.io.Serializable;
+
+public class Scores implements Serializable {
+    private static long serialVersionUID=1l;
     private String subject;
-    private String score;
-    public Scores(String subject,String score) {
+    private Double score;
+    public Scores(String subject,Double score) {
         this.subject=subject;
         this.score=score;
     }
+    public Scores() {
 
-    public String getScore() {
+    }
+
+    public Double getScore() {
         return score;
     }
 
@@ -16,7 +23,7 @@ public class Scores {
         return subject;
     }
 
-    public void setScore(String score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
