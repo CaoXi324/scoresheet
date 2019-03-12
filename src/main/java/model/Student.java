@@ -2,6 +2,7 @@ package main.java.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Student implements Serializable {
     private static long serialVersionUID = 1l;
@@ -11,22 +12,34 @@ public class Student implements Serializable {
     private Double averageScore;
     private Double totalScore;
 
+
+
     public Student(String name, String id, ArrayList<Scores> scores) {
         this.name = name;
         this.id = id;
         this.scores = scores;
+        this.totalScore=scores.stream().map(ele->ele.getScore()).reduce(0.0,(a,b)->a+b);
+        this.averageScore=totalScore/scores.size();
+
+
     }
 
     public Student() {
 
     }
 
-    public void setAverageScore() {
-        this.averageScore = scores.stream().map(ele -> ele.getScore()).reduce(0.0, (a, b) -> a + b) / scores.size();
+    public void setAverageScore(ArrayList<Scores> scores) {
+        this.averageScore=totalScore/scores.size();
+
+
     }
 
-    public void setTotalScore() {
-        this.averageScore = scores.stream().map(ele -> ele.getScore()).reduce(0.0, (a, b) -> a + b);
+    public void setTotalScore(ArrayList<Scores> scores) {
+        Double totalScore=0.0;
+        for(Scores score:scores){
+            totalScore+=score.getScore();
+        }
+        this.totalScore = totalScore;
 
     }
 

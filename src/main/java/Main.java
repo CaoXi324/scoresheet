@@ -6,6 +6,7 @@ import main.java.service.Service;
 import main.java.tools.Input;
 import main.java.tools.PrintScoreSheet;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class Main {
                         studentFromFile.add(student);
                         service.saveStudentFile(studentFromFile);
                     }
+                    break;
 
                 case "2":
                     System.out.println(note.getHintId());
@@ -48,6 +50,7 @@ public class Main {
                     }
                     List<Student> neededStudent = service.getNeededStudents(idString);
                     printScoreSheet.printScoreSheet(neededStudent);
+                    break;
 
                 case "3":
                     quit = true;

@@ -13,23 +13,23 @@ public class PrintScoreSheet {
         final String FIRSTLINE = "成绩单";
         final String SHORTLINES = "========================";
         List<Double> totalScoreAverageAndMedian = service.getClassTotalScoreAverageAndMedian();
-        List<String> subjectList = neededStudentList.get(0).getScores().stream().map(ele -> ele.getSubject() + "|").collect(Collectors.toList());
-        String scores = subjectList.toString();
+        String subjectListString = neededStudentList.get(0).getScores().stream().map(ele -> ele.getSubject())
+                .collect(Collectors.joining("|"));
         System.out.println(FIRSTLINE);
         List<String> nameAndScore = new ArrayList<>();
         for (Student student : neededStudentList) {
-            nameAndScore.add(student.getName() + "|" + student.getScores().stream().map(ele -> ele.getScore() + "|").collect(Collectors.joining()) +
+            nameAndScore.add(student.getName() + "|" + student.getScores().stream().map(ele -> ele.getScore().toString())
+                    .collect(Collectors.joining("|")) +
                     student.getAverageScore().toString() + "|" + student.getTotalScore().toString());
         }
-        System.out.println("姓名|" + scores + "平均分|" + "总分");
+        System.out.println("姓名|" + subjectListString + "|平均分|" + "总分");
         System.out.println(SHORTLINES);
         for (String element : nameAndScore) {
             System.out.println(element);
         }
         System.out.println(SHORTLINES);
-        for (Double element :totalScoreAverageAndMedian){
-            System.out.println(element);
-        }
+        System.out.println("全班总分平均数："+totalScoreAverageAndMedian.get(0));
+        System.out.println("全班总分中位数："+totalScoreAverageAndMedian.get(1));
 
     }
 }
