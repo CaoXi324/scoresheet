@@ -6,9 +6,9 @@ import main.java.service.Service;
 import main.java.tools.Input;
 import main.java.tools.PrintScoreSheet;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -31,14 +31,10 @@ public class Main {
                     }
                     Student student = service.getStudentClass(studentString);
                     List<Student> studentFromFile = service.outputStudent();
-                    if (studentFromFile == null) {
-                        List<Student> originStudentList = new ArrayList<>();
-                        originStudentList.add(student);
-                        service.saveStudentFile(originStudentList);
-                    } else {
-                        studentFromFile.add(student);
-                        service.saveStudentFile(studentFromFile);
-                    }
+                    List<Student> originStudentList = new ArrayList<>();
+                    List<Student> originStudentFromFile = Optional.ofNullable(studentFromFile).orElseGet(() -> originStudentList);
+                    originStudentFromFile.add(student);
+                    service.saveStudentFile(originStudentFromFile);
                     break;
 
                 case "2":

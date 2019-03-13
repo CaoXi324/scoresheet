@@ -43,7 +43,7 @@ public class Service {
     }
 
     public boolean judgeIdFormat(String idString) {
-        List<String> idList = Arrays.asList(idString.split("，"));
+        List<String> idList = Arrays.asList(idString.split(","));
         boolean ifRight = true;
         for (String str : idList) {
             for (int i = 0; i < str.length(); i++) {
@@ -68,9 +68,11 @@ public class Service {
 
     public List<Student> getNeededStudents(String ids) throws Exception {
         List<Student> allStudentsList = outputStudent();
-        List<String> idString = Arrays.asList(ids);
+        List<String> idString = Arrays.asList(ids.split(","));
 
-        return allStudentsList.stream().filter(ele -> idString.contains(ele.getId())).collect(Collectors.toList());
+        List<Student> neededStudentsList= allStudentsList.stream().filter(ele -> idString.contains(ele.getId())).collect(Collectors.toList());
+        System.out.println(neededStudentsList.size());
+        return neededStudentsList;
     }
 
     public Student getStudentClass(String studentString) {
